@@ -64,8 +64,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: 0;
-  padding: 0;
+
 }
 
 .user-avatar {

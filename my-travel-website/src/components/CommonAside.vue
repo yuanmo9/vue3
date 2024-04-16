@@ -9,31 +9,32 @@
       @open="handleOpen"
       @close="handleClose"
     >
-      <el-sub-menu index="1"  @click="goToHomePage">
+      <el-menu-item index="1"  @click="goToHomePage">
         <template #title>
-          <el-icon><location /></el-icon>
+          <el-icon><HomeFilled /></el-icon>
           <span>首页</span>
         </template>
      
-        <el-menu-item-group title="Group Two">
-          
-        </el-menu-item-group>
      
-      </el-sub-menu>
-
-      <el-menu-item index="2">
-        <el-icon><icon-menu /></el-icon>
-        <span>页面一</span>
       </el-menu-item>
 
-      <el-menu-item index="3">
-        <el-icon><document /></el-icon>
-        <span>页面二</span>
+      <el-menu-item index="2"  @click="goToPublicPage">
+        <el-icon><Ship/></el-icon>
+        <span>目的地</span>
       </el-menu-item>
 
-      <el-menu-item index="4">
-        <el-icon><setting /></el-icon>
-        <span>页面三</span>
+      <el-menu-item index="3" @click="goToForumPage">
+        <el-icon><ChatLineSquare /></el-icon>
+        <span>论坛 </span>
+      </el-menu-item>
+
+      <el-menu-item index="4" @click="goToUserPage">
+        <el-icon><User /></el-icon>
+        <span>个人中心</span>
+      </el-menu-item>
+      <el-menu-item index="5" @click="goToEyePage" >
+        <el-icon><Monitor/></el-icon>
+        <span>数据一览</span>
       </el-menu-item>
 
     </el-menu>
@@ -46,6 +47,18 @@ export default {
     // 点击首页跳转到 HomePage 页面
     goToHomePage() {
       this.$router.push('/homePage');
+    },
+    goToPublicPage(){
+      this.$router.push('/publicPage')
+    },
+    goToForumPage(){
+      this.$router.push('/forumPage')
+    },
+    goToUserPage(){
+        this.$router.push('/userPage')
+    },
+    goToEyePage(){
+      this.$router.push('/eyePage')
     }
   }
 };
@@ -60,6 +73,7 @@ export default {
   top: 0px;
   bottom: 0;
   overflow-y: scroll;
+
 }
 
 .sidebar::-webkit-scrollbar {
@@ -67,7 +81,7 @@ export default {
 }
 
 .sidebar-el-menu:not(.el-menu--collapse) {
-  width: 230px;
+  width: 200px;
 }
 
 .sidebar > ul {
