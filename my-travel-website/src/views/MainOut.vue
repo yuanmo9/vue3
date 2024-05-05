@@ -12,7 +12,7 @@
       </el-aside>
         <el-main class="content">
           <router-view></router-view> <!-- 渲染子路由 -->
-        <EyePage></EyePage>
+       
         </el-main>
       </el-container>
     </el-container>
@@ -22,7 +22,7 @@
 <script>
 import CommonAside from "../components/CommonAside.vue";
 import CommonHeader from "../components/CommonHeader.vue";
-import EyePage from "../components/EyePage.vue";
+
 
 
 
@@ -31,7 +31,7 @@ export default {
  components:{
   CommonAside,
   CommonHeader,
-  EyePage
+ 
  }
 }
 </script>
