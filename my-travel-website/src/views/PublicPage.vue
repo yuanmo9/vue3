@@ -1,7 +1,7 @@
+<!-- 目的地组件 -->
 <template>
   <div class="public-page">
     <div class="content-container">
-      <!-- 走马灯 -->
       <div class="carousel-container">
         <el-carousel :indicator-position="'outside'" height="400px">
           <el-carousel-item v-for="(image, index) in carouselImages" :key="index">
@@ -10,7 +10,6 @@
         </el-carousel>
       </div>
       
-      <!-- 表单 -->
       <el-card class="form-container">
         <el-form label-width="100px" class="form">
           <el-form-item label="出发地">
@@ -44,10 +43,10 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { ElMessage } from 'element-plus';
 
 export default {
-  name: 'PublicPage',
   data() {
     return {
       carouselImages: [
@@ -56,17 +55,29 @@ export default {
         require('@/assets/hongkong.jpg'),
         require('@/assets/paris.jpg')
       ],
-      departure: '', // 出发地
-      destination: '', // 目的地
-      departureDate: '', // 出发日期
-      checkboxValues: [], // 复选框选择项
-      remark: '' // 备注
+      departure: '', 
+      destination: '', 
+      departureDate: '', 
+      checkboxValues: [], 
+      remark: '' 
     };
   },
   methods: {
+    ...mapActions('visitor', ['updateDestinationData']), // 引入更新目的地数据的动作
     handleSubmit() {
-      // 这里模拟提交过程，实际应用中需要发送数据给后端
-      // 假设提交成功后显示成功消息提示
+      if (!this.departure || !this.destination || !this.departureDate || this.checkboxValues.length === 0 || !this.remark) {
+        ElMessage.error('提交失败，请填写完整表格');
+        return;
+      }
+
+      this.updateDestinationData({ // 更新目的地数据
+        departure: this.departure,
+        destination: this.destination,
+        departureDate: this.departureDate,
+        checkboxValues: this.checkboxValues,
+        remark: this.remark
+      });
+
       ElMessage.success('提交成功');
     }
   }
@@ -75,21 +86,20 @@ export default {
 
 <style scoped>
 .public-page {
-  /* 确保组件大小占满除侧边栏和页眉外的浏览器页面 */
-  width: calc(100vw - 200px); /* 减去侧边栏的宽度 */
-  height: calc(100vh - 64px); /* 减去页眉的高度 */
+  width: calc(100vw - 200px);
+  height: calc(100vh - 64px);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('@/assets/B.jpg'); /* 设置背景图片 */
-  background-size: cover; /* 背景图片铺满整个容器 */
-  background-position: center; /* 背景图片居中 */
+  background-image: url('@/assets/B.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .content-container {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* 居中 */
+  align-items: center;
   width: 900px;
 }
 
@@ -100,8 +110,9 @@ export default {
 .form-container {
   width: 400px;
 }
+
 .carousel-container img {
-  width: 100%; /* 图片宽度自适应原本图片的宽度 */
-  height: 100%; /* 图片高度自适应走马灯容器高度 */
+  width: 100%;
+  height: 100%;
 }
 </style>

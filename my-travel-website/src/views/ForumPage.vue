@@ -2,7 +2,7 @@
   <div class="forum-page">
     <div class="forum-header">
       <h2>论坛 | 分享 结伴 找攻略</h2>
-      <button @click="showModal = true">发新帖</button>
+      <el-button @click="showModal = true" type="primary">发新帖</el-button>
     </div>
     <NewPostModal v-if="showModal" @closeModal="showModal = false" @submitPost="addPost" />
     <div class="forum-posts">

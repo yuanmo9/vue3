@@ -58,7 +58,7 @@ export default {
         this.$router.push('/userPage')
     },
     goToEyePage(){
-      this.$router.push('/eyePage')
+      this.$router.push('/overviewPage')
     }
   }
 };

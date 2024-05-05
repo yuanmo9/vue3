@@ -29,7 +29,9 @@
 </template>
 
 <script>
-import { ElForm, ElFormItem, ElInput, ElButton, ElCard } from 'element-plus';
+import { ElForm, ElFormItem, ElInput, ElButton, ElCard,ElMessage } from 'element-plus';
+import { mapState } from 'vuex'; // 使用 mapState 辅助函数
+
 
 export default {
   components: {
@@ -38,7 +40,6 @@ export default {
     ElInput,
     ElButton,
     ElCard,
-   
   },
   data() {
     return {
@@ -52,23 +53,35 @@ export default {
       }
     };
   },
+  computed: {
+    ...mapState({
+      isAuthenticated: state => state.visitor.auth.isAuthenticated,
+      username: state => state.visitor.auth.username,
+      password: state => state.visitor.auth.password,
+    })
+  },
   methods: {
     submitForm() {
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs.loginForm.validate(async (valid) => {
         if (valid) {
-          // 在这里执行登录逻辑，例如验证用户名密码，跳转页面等
-          console.log('登录成功');
-          // 假设登录成功后跳转到homePage
-          this.$router.push('/homePage');
+          if (this.loginForm.username === this.username && this.loginForm.password === this.password) {
+            this.$store.commit('visitor/login');
+            ElMessage.success('登录成功'); 
+            console.log('登录成功');
+            this.$router.push('/homePage');
+          } else {
+            ElMessage.error('用户名或密码错误'); 
+            console.log('用户名或密码错误');
+          }
         } else {
-          console.log('登录失败');
-          return false;
+          console.log('表单验证失败');
         }
       });
     }
   }
 };
 </script>
+
 
 <style scoped>
 /* 登录页面样式 */

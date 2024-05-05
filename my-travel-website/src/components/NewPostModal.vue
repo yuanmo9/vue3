@@ -1,6 +1,8 @@
 <template>
   <div class="new-post-modal">
+    <div class="main-post">
     <el-input v-model="input" style="width: 240px" placeholder="请输入标题" />
+    <p></p>
     <el-input
       v-model="newPost.content"
       placeholder="请发表您的评论"
@@ -9,9 +11,10 @@
       rows="4"
       show-word-limit
     ></el-input>
-    <el-button icon="PictureFilled" @click="selectImage">上传图片</el-button>
+    <el-button icon="PictureFilled" @click="selectImage" type="primary">上传图片</el-button>
     <input type="file" ref="fileInput" style="display: none" @change="handleImageUpload">
-    <el-button icon="Check" @click="saveAndSubmit">保存并提交</el-button>
+    <el-button icon="Check" @click="saveAndSubmit" type="success">保存并提交</el-button>
+  </div>
   </div>
 </template>
 
@@ -58,6 +61,16 @@ export default {
 </script>
 
 <style scoped>
+.new-post-modal{
+  height:70% ;
+
+}
+
+.main-post{
+  padding-top: 50px;
+
+}
+
 .textarea-with-button {
   width: 100%;
   height: 100px;
@@ -74,4 +87,6 @@ export default {
 .el-button {
   margin-top: 10px;
 }
+
+
 </style>
